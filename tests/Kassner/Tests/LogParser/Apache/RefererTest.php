@@ -1,20 +1,19 @@
 <?php
 
-namespace Kassner\Tests\ApacheLogParser\Apache;
+namespace Kassner\Tests\LogParser\Apache;
 
-use Kassner\ApacheLogParser\ApacheLogParser;
+use Kassner\LogParser\LogParser;
 
 class RefererTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testFormat()
     {
-        $parser = new ApacheLogParser("%{Referer}i -> %U");
+        $parser = new LogParser("%{Referer}i -> %U");
 
         $entry = $parser->parse('- -> /index.php');
         $this->assertEquals('/index.php', $entry->URL);
         $this->assertEquals('-', $entry->HeaderReferer);
-
 
         $entry = $parser->parse('http://ecommerce.dev/ -> /media/css/fe0e1ba295680ef4c59ccc987fca2371.css');
         $this->assertEquals('/media/css/fe0e1ba295680ef4c59ccc987fca2371.css', $entry->URL);
